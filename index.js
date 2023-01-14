@@ -23,7 +23,7 @@ client.on('ready', () => {
         channel.send('Je suis de retour les bewbews')
         .catch(console.error);
     }
-   setTimeout(Inactivite, 1800000);
+   //setTimeout(Inactivite, 1800000);
 });
 const spotify = require('./spotify.js');
 const request = require('request');
