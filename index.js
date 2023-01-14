@@ -185,7 +185,7 @@ function Inactivite() {
       reco_asso = {}
       reco_choix = [];
       liked_track = []
-      await message.channel.send("✅Donne moi des Tires de musique ou des artistes !🕺🕺");
+      await message.channel.send("✅Donne moi des Titres de musique ou des artistes !🕺🕺");
   } else if (message.content.startsWith("stop") && reco_stage === 1) {
       message.channel.bulkDelete(100) 
       reco_stage = 0;
@@ -320,7 +320,7 @@ client.on('messageReactionAdd',async (reaction, user) => {
     reco_asso = {}
     reco_choix = [];
     liked_track = []
-    await reaction.message.channel.send("✅Donne moi des Tires de musique ou des artistes !🕺🕺");
+    await reaction.message.channel.send("✅Donne moi des Titres de musique ou des artistes !🕺🕺");
   }
 });
 
