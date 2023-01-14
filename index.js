@@ -52,11 +52,12 @@ console.log(spotifyToken)
 async function envoie_prop(demande, offset, channel) {
   let res = await spotify.demande_id(spotifyToken, demande, offset);
   if (res === -1) {
+	  console.log("nouveau token demandé")
     spotifyToken = await spotify.refresh_token();      
     res = await spotify.demande_id(spotifyToken, demande);
   }
   if (res === -1) {
-    console.log("probleme requete");
+    console.log("token demandé mais requete toujours invalide");
     return;
   }
   for (let i = 0; i < res.length; i++) {
@@ -115,7 +116,7 @@ const playTrack = async (prop, voice_channel,m) => {
 	 //.setTimestamp()
 	 //.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
   let m2 = null;
-  if(m==null)
+  if(m==null && prop['preview_url']!=null)
   {
     const c = client.channels.cache.get(channelRecoId);
     m2 = await c.send({ embeds: [embed] });
@@ -123,9 +124,8 @@ const playTrack = async (prop, voice_channel,m) => {
     await m2.react("❤️")
     await m2.react('✅')
   }
-  else {
+  else if(prop['preview_url']!=null) {
     m.edit({ embeds: [embed] });
-
   }
   if(prop['preview_url']!=null)
   {
