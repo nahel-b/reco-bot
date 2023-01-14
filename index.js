@@ -279,7 +279,7 @@ client.on('messageReactionAdd',async (reaction, user) => {
 	   .setColor(0x0099FF)
 	   .setTitle('🎶🎤Recommandations :🎵🎧')
     liked_track.forEach(async item => {
-          embed.addFields({name:item['name'] , value:item['artists'][0]['name']})
+          embed.addFields({name:item['name'] + ' - ' + item['artists'][0]['name'], value:'-'})
     });
 	if(liked_track.length!=0){
     const user = client.users.cache.get(current_user);
