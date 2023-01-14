@@ -180,7 +180,12 @@ function Inactivite() {
         message.reply("feur");
     }
   if (message.content === 'reco' && message.channel.id === channelRecoId ) {
-      await message.channel.bulkDelete(100)
+	try{
+      		await message.channel.bulkDelete(100)
+	}
+	  catch (error) {
+  		console.error("pas de suppression de message");
+	}
       reco_stage = 1;
       reco_offset = 0;
       reco_asso = {}
@@ -188,7 +193,12 @@ function Inactivite() {
       liked_track = []
       await message.channel.send("✅Donne moi des Titres de musique ou des artistes !🕺🕺");
   } else if (message.content.startsWith("stop") && reco_stage === 1) {
-      message.channel.bulkDelete(100) 
+	  try{
+      		await message.channel.bulkDelete(100)
+	}
+	  catch (error) {
+  		console.error("pas de suppression de message");
+	}
       reco_stage = 0;
       reco_offset = 0;
       reco_asso = {}
