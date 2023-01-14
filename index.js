@@ -166,6 +166,7 @@ function Inactivite() {
         const timeSinceLastMessage = Date.now() - mostRecentMessage.createdTimestamp;
 
               if (timeSinceLastMessage > 60000*15) {
+		      
             channel.send('Reinitialistion');
         }
     });
@@ -263,57 +264,17 @@ client.on('messageReactionAdd',async (reaction, user) => {
 
     const connection = getVoiceConnection(reaction.message.channel.guild.id);
     connection.destroy();
-    //const user = client.users.cache.get(current_user);
-    //user.send('Voila les titres recommandés :');
-     //for (let i = 0; i < liked_track.length; i++) 
-     //{
-     // user.send(liked_track[i]['name'] + ' - ' + liked_track[i]['artists'][0]['name']);
-    // }
     const { EmbedBuilder } = require('discord.js');
     const embed = new EmbedBuilder()
 	   .setColor(0x0099FF)
 	   .setTitle('🎶🎤Recommandations :🎵🎧')
-    
-   
     liked_track.forEach(async item => {
-      // let deezer_link = 'i'
-      //const options = { url: `https://api.deezer.com/search?q=track:"${encodeURIComponent(item['name'])}"artist:"${encodeURIComponent(item['artists'][0]['name'])}"`,json: true};
-  //  await request(options, async function (error, response, body) {
-  //    if (error) { console.log(error);
-  //} else {
-  //    const trackId = body.data[0].id;
-  //    deezer_link = `https://www.deezer.com/track/${trackId}`
-  //    console.log('rtrt' + deezer_link)
-//}})
-
-      //---la
-     // const options = { url: `https://api.deezer.com/search?q=track:"${encodeURIComponent(item['name'])}"artist:"${encodeURIComponent(item['artists'][0]['name'])}"`,json: true};
-  //    const requestPromise = new Promise((resolve, reject) => {
-    //request(options, function (error, response, body) {
-      //  if (error) {
-      //      console.log(error);
-      //      reject(error);
-      //  } else {
-       //     const trackId = body.data[0].id;
-       //     deezer_link = `https://www.deezer.com/track/${trackId}`;
-       //     console.log('rtrt' + deezer_link);
-        //    resolve();
-    //    }
-  //  });
-//});
-
-   //   await requestPromise;
-
-   //   let spotify_link = item['external_urls']['spotify']
-      // -- [deezer](${deezer_link})`
-    //  console.log('jiji - ' + deezer_link)
           embed.addFields({name:item['name'] , value:item['artists'][0]['name']})
-
-
-    //  embed.addFields({name:item['name'] + ' - ' + item['artists'][0]['name'], value:`[deezer](${deezer_link})`})
     });
+	if(liked_tracks.length!=0){
     const user = client.users.cache.get(current_user);
 	   user.send({ embeds: [embed] })
+	}
     await reaction.message.channel.bulkDelete(100)
     reco_stage = 1;
     reco_offset = 0;
