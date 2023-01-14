@@ -271,7 +271,7 @@ client.on('messageReactionAdd',async (reaction, user) => {
     liked_track.forEach(async item => {
           embed.addFields({name:item['name'] , value:item['artists'][0]['name']})
     });
-	if(liked_tracks.length!=0){
+	if(liked_track.length!=0){
     const user = client.users.cache.get(current_user);
 	   user.send({ embeds: [embed] })
 	}
