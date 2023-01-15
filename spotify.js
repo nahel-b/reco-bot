@@ -10,6 +10,8 @@ const { Buffer } = require('buffer');
 
 async function refresh_token() {
   return new Promise((resolve, reject) => {
+
+    
     const url = 'https://accounts.spotify.com/api/token';
     const headers = {};
     const data = {};
@@ -42,11 +44,13 @@ async function demande_id (access_token, query, offset) {
         };
 
         request.get({ url: 'https://api.spotify.com/v1/search', qs: params, headers }, (error, response, body) => {
+          console.log('response')
+          console.log(response.statusCode)
             if (response.statusCode === 200) {
                 const searchData = JSON.parse(body);
                 resolve(searchData.tracks.items);
             } else {
-                reject(-1);
+                resolve(-1);
             }
         });
     });
@@ -66,7 +70,7 @@ async function change_tracks(access_token, tracks_reco, offset) {
         resolve(jsonBody.tracks);
       } else {
         console.log(`Error in search: ${response.statusCode}`);
-        reject(-1);
+        resolve(-1);
       }
     });
   });
@@ -74,18 +78,3 @@ async function change_tracks(access_token, tracks_reco, offset) {
 
 
 module.exports = { refresh_token, demande_id,change_tracks};
-
-//async function main() {
-  //try {
-   // const token = await getSpotifyToken();
-    //console.log(token)
-   // const r = await demande_id(token,"flume",0)
-   //// console.log(r)
-   // console.log(await change_tracks(token,["5è§"],0));
-  //} catch (error) {
-  //  console.log(error);
-//  }
-//}
-
-//main();
-
