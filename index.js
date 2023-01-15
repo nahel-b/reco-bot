@@ -52,7 +52,7 @@ console.log(spotifyToken)
 async function envoie_prop(demande, offset, channel) {
   let res = await spotify.demande_id(spotifyToken, demande, offset);
   if (res === -1) {
-	  console.log("nouveau token demandé")
+	  console.log("nouveau token demandé -- envoie prop")
     spotifyToken = await spotify.refresh_token();      
     res = await spotify.demande_id(spotifyToken, demande);
   }
@@ -85,11 +85,12 @@ async function envoie_prop(demande, offset, channel) {
 async function changeTracks() {
   let res = await spotify.change_tracks(spotifyToken, reco_choix, prop_offset);
   if (res === -1) {
+console.log("nouveau token demandé -- changeTracks")
     spotifyToken = await spotify.refresh_token();
     res = await spotify.change_tracks(spotifyToken, prop_offset);
   }
   if (res === -1) {
-    console.log("Problem with the request");
+    console.log("token demandé mais requete toujours invalide");
     return;
   }
   prop_offset = prop_offset + 20;
